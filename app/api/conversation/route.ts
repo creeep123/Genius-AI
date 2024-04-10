@@ -24,7 +24,8 @@ export async function POST(req: Request) {
 
     const response = await openai.chat.completions.create({
       // model: "gpt-3.5-turbo",
-      model: "google/gemini-pro-1.5",
+      // model: "google/gemini-pro-1.5",
+      model: "mistralai/mistral-7b-instruct:free",
       messages
     });
 
