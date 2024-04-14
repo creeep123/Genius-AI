@@ -12,6 +12,11 @@ const openai = new OpenAI({
   // dangerouslyAllowBrowser: true,
 })
 
+const instructionMessage  = {
+  role: "system",
+  content: "You are a code generator, you must answer in markdown format, use code comments for explanations.",
+}
+
 export async function POST(req: Request) {
   try {
     const userId = auth();
@@ -22,18 +27,13 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if(!messages) {
-      return new NextResponse('messages are required', { status: 400 });
-    }
-
     const response = await openai.chat.completions.create({
       // model: "gpt-3.5-turbo",
       // model: "google/gemini-pro-1.5",
-      model: "mistralai/mistral-7b-instruct:free",
-      messages
+      model: "mistralai/mixtral-8x22b:free",
+      messages: [instructionMessage, ...messages]
     });
 
-    console.log('response :>> ', response);
     return new NextResponse(JSON.stringify(response.choices[0].message), { status: 200 });
   } catch (error) {
     console.log('[CONVERSATION_ERROR]', error);
