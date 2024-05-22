@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { FreeCounter } from './free-counter';
 
 const montserrat = Montserrat({
   weight: '600',
@@ -65,7 +66,11 @@ const routes = [
   },
 ];
 
-const Sidebar = () => {
+interface SidebarProps {
+  apiLimitCount: number;
+}
+
+const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
   const pathname = usePathname();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -76,7 +81,7 @@ const Sidebar = () => {
         item-center pl-3 mb-14"
         >
           <div className="relative w-8 h-8 mr-4">
-            <Image fill alt="Logo" src="/logo.png" />
+            <Image className="w-150" fill alt="Logo" src="/logo.svg" />
           </div>
           <h1 className={cn('text-2xl font-bold', montserrat.className)}>
             Genius
@@ -102,6 +107,9 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter
+        apiLimitCount={apiLimitCount}
+      />
     </div>
   );
 };

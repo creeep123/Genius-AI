@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { increaseApiLimit,checkApiLimit } from '@/lib/api_limit';
 
 const openai = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
@@ -27,12 +28,20 @@ export async function POST(req: Request) {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
+    const freeTrial = await checkApiLimit();
+
+    if(!freeTrial){
+      return new NextResponse('Free trial expired', { status: 403 });
+    }
+
     const response = await openai.chat.completions.create({
       // model: "gpt-3.5-turbo",
       // model: "google/gemini-pro-1.5",
       model: "mistralai/mixtral-8x22b:free",
       messages: [instructionMessage, ...messages]
     });
+
+    await increaseApiLimit();
 
     return new NextResponse(JSON.stringify(response.choices[0].message), { status: 200 });
   } catch (error) {

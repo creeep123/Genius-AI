@@ -25,9 +25,11 @@ import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
 import { cn } from '@/lib/utils';
 import { Card, CardFooter } from '@/components/ui/card';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 const CodePage = () => {
   const router = useRouter();
+  const proModal = useProModal();
   const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,7 +58,9 @@ const CodePage = () => {
       setImages(urls);
       form.reset();
     } catch (err) {
-      //TODO: Open Pro Modal
+            if(err?.response?.status === 403) {
+        proModal.onOpen();  
+      }
       console.log(err);
     } finally {
       router.refresh();

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🤖 Aether AI：您的多模态内容创作中心
 
-## Getting Started
+# 项目简介
 
-First, run the development server:
+Aether AI 是一个集文字、代码、视频和音乐生成功能于一体的多模态内容创作平台。取名"Aether AI"寓意着将普通元素升华为精神理念,象征着我们致力于通过先进的人工智能技术,帮助用户快速、高效地创造出富有创意的原创内容。
+
+# 核心功能
+
+## 📝 文字生成
+- 输入关键词或提示,即可生成流畅、富有创意的文字内容,包括博客文章、故事情节、广告文案等。
+- 支持多种文体和语言,满足您的个性化需求。
+
+## 💻 代码生成
+- 输入功能描述,即可生成可执行的代码,包括前端、后端、数据处理等。
+- 支持主流编程语言,大幅提升开发效率。
+
+## 🎥 视频生成
+- 根据文字提示,生成个性化的视频内容,包括动画短片、产品展示、教学视频等。
+- 支持多种视觉风格和剪辑方式,为您的视频注入创意灵感。
+
+## 🎵 音乐生成
+- 输入情感关键词或音乐风格,即可生成富有感染力的原创音乐。
+- 支持多种乐器和节奏,满足您对音乐创作的各种需求。
+
+# 为什么选择 Aether AI
+
+💡 **突破创意瓶颈**: 摆脱创意枯竭,让 AI 为您注入无限创意灵感。
+
+⏰ **提高工作效率**: 无需耗费大量时间,即可生成高质量的多媒体内容。
+
+🌍 **适用广泛**: 适用于广告、教育、娱乐、科研等各行各业。
+
+🔒 **安全可靠**: 采用业界领先的隐私保护措施,确保您的数据安全。
+
+## 如何运行
+
+这是一个基于 [Next.js](https://nextjs.org/) 的项目,使用 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 进行初始化。要运行开发服务器,请执行以下步骤:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev # 或者 yarn dev、pnpm dev、bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000)，您就可以看到项目运行的结果。您可以通过修改 `app/page.tsx` 文件开始编辑页面,页面会实时更新。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+该项目使用 [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) 自动优化和加载 Inter 字体,这是一种自定义的 Google 字体。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 致谢
+[Antonio](https://www.codewithantonio.com/projects/ai-saas)

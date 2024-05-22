@@ -4,10 +4,9 @@ import axios from 'axios';
 import Heading from '@/components/heading';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { Code } from 'lucide-react';
+import { Music } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import ReactMarkdown from 'react-markdown';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 
 import { formSchema } from './constants';
@@ -16,15 +15,12 @@ import { Button } from '@/components/ui/button';
 import { ChatCompletionMessage } from 'openai/resources/index.mjs';
 import { Empty } from '@/components/empty';
 import { Loader } from '@/components/loader';
-import { cn } from '@/lib/utils';
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
 import { useProModal } from '@/hooks/use-pro-modal';
 
-const CodePage = () => {
+const MusicPage = () => {
   const router = useRouter();
   const proModal = useProModal();
-  const [messages, setMessages] = useState<ChatCompletionMessage[]>([]);
+  const [music, setMusic] = useState();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,17 +32,11 @@ const CodePage = () => {
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const userMessage: ChatCompletionMessage = {
-        role: 'user',
-        content: values.prompt,
-      };
+      setMusic(undefined);
 
-      const newMessage = [...messages, userMessage];
-      const response = await axios.post('/api/code', {
-        messages: newMessage,
-      });
+      const response = await axios.post('/api/music', values);
 
-      setMessages((current) => [...current, userMessage, response.data]);
+      setMusic(response.data);
 
       form.reset();
     } catch (err) {
@@ -62,11 +52,11 @@ const CodePage = () => {
   return (
     <div>
       <Heading
-        title="Code Generation"
-        description="Generate code using descriptive text."
-        icon={Code}
-        iconColor="text-green-700"
-        bgColor="bg-green-700/10"
+        title="Music Generation"
+        description="Turn your prompt into Music."
+        icon={Music}
+        iconColor="text-emerald-500"
+        bgColor="bg-emerald-500/10"
       ></Heading>
       <div className="px-4 lg:px-8">
         <Form {...form}>
@@ -98,7 +88,7 @@ const CodePage = () => {
                       focus-visible:ring-0
                       focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="Simple toggle switch component using react hooks."
+                      placeholder="Piano solo"
                       {...field}
                     />
                   </FormControl>
@@ -122,41 +112,14 @@ const CodePage = () => {
             <Loader />
           </div>
         )}
-        {messages.length === 0 && !isLoading && (
-          <Empty label="No conversation." />
+        {!music && !isLoading && (
+          <Empty label="No music generated." />
         )}
-        <div className="flex flex-col-reverse gap-y-4">
-          {messages.map((message, index) => {
-            return (
-              <div
-                key={message.content}
-                className={cn(
-                  'p-8 w-full flex items-start gap-x-8 rounded-lg',
-                  message.role === 'user'
-                    ? 'bg-white border border-black/10'
-                    : 'bg-muted'
-                )}
-              >
-                {message.role === 'user'? <UserAvatar/> : <BotAvatar/>}
-                <ReactMarkdown
-                  components={{
-                    pre:({node, ...props}) => (
-                    <div className="overflow-auto w-full my-2
-                    bg-black/10 p-2 rounded-lg">
-                      <pre {...props}/>
-                    </div>),
-                    code:({node, ...props}) => (
-                      <code className='bg-black/10 rounded-lg p-1' {...props}/>
-                    )
-                  }}
-                  className="text-sm overflow-hidden leading-7"
-                >
-                  {message.content || ''}
-                </ReactMarkdown>
-              </div>
-            );
-          })}
-        </div>
+        {music && !isLoading && (
+          <audio controls className='w-full mt-8'>
+            <source src={music} />
+          </audio>          
+        )}
       </div>
       </div>
 
@@ -164,4 +127,4 @@ const CodePage = () => {
   );
 };
 
-export default CodePage;
+export default MusicPage;

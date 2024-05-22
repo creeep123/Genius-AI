@@ -6,7 +6,7 @@ import {
 export const BotAvatar = () => {
   return (
     <Avatar className="h-8 w-8">
-      <AvatarImage src="/logo.png" alt="bot" />
+      <AvatarImage src="/logo.svg" alt="bot" />
     </Avatar>
   )
 }
