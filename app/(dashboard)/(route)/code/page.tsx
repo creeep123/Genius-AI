@@ -37,7 +37,7 @@ const CodePage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const userMessage: ChatCompletionMessage = {
-        role: 'user',
+        role: 'assistant',
         content: values.prompt,
       };
 
