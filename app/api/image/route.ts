@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import Replicate from 'replicate';
 import { increaseApiLimit, checkApiLimit } from '@/lib/api_limit';
-import { HttpProxyAgent } from 'http-proxy-agent';
+// import { HttpProxyAgent } from 'http-proxy-agent';
 
-const proxyAgent = new HttpProxyAgent("https://127.0.0.1:7890/"); //这里是用的我的Clash的本地地址
+// const proxyAgent = new HttpProxyAgent("https://127.0.0.1:7890/"); //这里是用的我的Clash的本地地址
 
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
@@ -65,7 +65,7 @@ async function query(data) {
       },
       method: 'POST',
       body: JSON.stringify(data),
-      agent: proxyAgent
+      // agent: proxyAgent
     }
   );
   const output = await response.blob();
