@@ -1,6 +1,6 @@
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import OpenAI from 'openai';role: 'user'
 import Replicate from 'replicate';
 import { increaseApiLimit, checkApiLimit } from '@/lib/api_limit';
 // import { HttpProxyAgent } from 'http-proxy-agent';
@@ -56,7 +56,7 @@ const openai = new OpenAI({
 // }
 
 // User HG GTA5 api
-async function query(data) {
+async function query(data: { prompt: any; amount: any; resolution: any; }) {
   const response = await fetch(
     'https://api-inference.huggingface.co/models/ItsJayQz/GTA5_Artwork_Diffusion',
     {

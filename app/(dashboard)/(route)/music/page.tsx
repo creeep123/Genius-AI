@@ -40,8 +40,8 @@ const MusicPage = () => {
 
       form.reset();
     } catch (err) {
-            if(err?.response?.status === 403) {
-        proModal.onOpen();  
+      if ((err as unknown as { response: any })?.response?.status === 403) {
+        proModal.onOpen();
       }
       console.log(err);
     } finally {

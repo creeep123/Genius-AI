@@ -40,7 +40,7 @@ const VideoPage = () => {
 
       form.reset();
     } catch (err) {
-      if (err?.response?.status === 403) {
+      if ((err as unknown as { response: any })?.response?.status === 403) {
         proModal.onOpen();
       }
       console.log(err);
